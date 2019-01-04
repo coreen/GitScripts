@@ -16,7 +16,12 @@ update_repos () {
 	for r in `ls -d */`
 	do
 		cd $r
+		CURRENT_BRANCH=`git branch --no-color | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'`
+		git stash
+		git checkout master
 		git pull origin master
+		git remote prune origin
+		git checkout ${CURRENT_BRANCH}
 		cd ..
 	done
 }
