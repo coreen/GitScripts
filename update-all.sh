@@ -22,6 +22,7 @@ update_repos () {
 		git pull origin master
 		git remote prune origin
 		git checkout ${CURRENT_BRANCH}
+		git stash pop
 		cd ..
 	done
 }
